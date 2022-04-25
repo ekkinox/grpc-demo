@@ -5,12 +5,17 @@
 ## Table of contents
 
 - [Presentation slides](#presnetation-slides)
+- [Protobuf definition](#protobuf-definition)
 - [Golang demo](#golang-demo)
 - [PHP demo](#php-demo)
 
 ## Presentation slides
 
 The presentation slides related to this repository [can be found here](https://docs.google.com/presentation/d/149Ia9TpyfdponGmLNFyFnPqMib_1-GRX7ruUfuvxnYw).
+
+## Protobuf definition
+
+The protobuf definition for this repository is located in the [proto/textTools.proto](proto/textTools.proto) file.
 
 ## Golang demo
 
