@@ -42,7 +42,7 @@ $ protoc --go_out=. --go_opt=paths=source_relative \
 
 - PHP stubs can be found in the [proto/php](proto/php) directory:
     - stubs in the [proto/php/App](proto/php/App) folder
-    - example of usage in [proto/php/example.php](proto/php/example.php)
+    - example of usage in [proto/php/example.php](proto/php/example.php) (Symfony controller)
 
 - if needed, to (re)generate proto PHP stubs
 
