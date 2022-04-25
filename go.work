@@ -1,0 +1,9 @@
+go 1.18
+
+replace github.com/ekkinox/grpc-demo/proto@latest => ./proto
+
+use (
+	./client
+	./proto
+	./server
+)
