@@ -1,4 +1,4 @@
-# gRPC: SOA booster
+# 🚀 gRPC: SOA booster
 
 > Introduction session to [gRPC](https://grpc.io) as [SOA](https://en.wikipedia.org/wiki/Service-oriented_architecture) booster using [Golang](https://go.dev) and [PHP](https://php.net).
 
