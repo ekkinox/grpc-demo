@@ -82,17 +82,20 @@ func doTransformTextAndSplit(c pb.TextToolsClient) {
 
 	// sending
 	go func() {
+
 		for _, req := range reqs {
 			fmt.Printf("Sending request: %v\n", req)
 			stream.Send(req)
 			time.Sleep(1 * time.Second)
 		}
+
 		stream.CloseSend()
 
 	}()
 
 	// receiving
 	go func() {
+
 		for {
 			resp, err := stream.Recv()
 
@@ -101,12 +104,13 @@ func doTransformTextAndSplit(c pb.TextToolsClient) {
 			}
 
 			if err != nil {
-				close(wait)
-				log.Fatalf("Error: %v", err)
+				log.Printf("Error: %v", err)
+				break
 			}
 
 			fmt.Printf("Received response: %v\n", resp.Result)
 		}
+
 		close(wait)
 	}()
 
