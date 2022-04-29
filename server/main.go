@@ -56,6 +56,7 @@ func (*server) TransformAndSplitText(stream pb.TextTools_TransformAndSplitTextSe
 		req, err := stream.Recv()
 
 		if err == io.EOF {
+			log.Println("End of rpc")
 			return nil
 		}
 
