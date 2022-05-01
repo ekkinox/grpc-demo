@@ -8,6 +8,7 @@ import (
 	"log"
 	"net"
 	"strings"
+	"time"
 
 	pb "github.com/ekkinox/grpc-demo/proto"
 	"google.golang.org/grpc"
@@ -71,6 +72,8 @@ func (*server) TransformAndSplitText(stream pb.TextTools_TransformAndSplitTextSe
 			err = stream.Send(&pb.TransformationResult{
 				Result: word,
 			})
+
+			time.Sleep(500 * time.Millisecond)
 
 			if err != nil {
 				log.Fatalf("Error while sending: %v", err)
