@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
-	pb "github.com/ekkinox/grpc-demo/proto/github.com/ekkinox/grpc-demo/proto"
 	"io"
 	"log"
 	"time"
 
+	pb "github.com/ekkinox/grpc-demo/proto/go"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
