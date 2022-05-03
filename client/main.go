@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
+	pb "github.com/ekkinox/grpc-demo/proto/github.com/ekkinox/grpc-demo/proto"
 	"io"
 	"log"
 	"time"
 
-	pb "github.com/ekkinox/grpc-demo/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -20,18 +20,18 @@ func main() {
 		log.Fatalf("Could not connect: %v", err)
 	}
 
-	c := pb.NewTextToolsClient(conn)
+	c := pb.NewTextToolsServiceClient(conn)
 
 	//doTransformText(c)
 	doTransformTextAndSplit(c)
 }
 
-func doTransformText(c pb.TextToolsClient) {
+func doTransformText(c pb.TextToolsServiceClient) {
 
 	fmt.Println("Calling TransformText ...")
 
-	res, err := c.TransformText(context.Background(), &pb.Transformation{
-		Transformer: pb.Transformer_UPPERCASE,
+	res, err := c.TransformText(context.Background(), &pb.TransformTextRequest{
+		Transformer: pb.Transformer_TRANSFORMER_UPPERCASE,
 		Text:        "abcdef",
 	})
 
@@ -42,7 +42,7 @@ func doTransformText(c pb.TextToolsClient) {
 	fmt.Printf("result : %v", res.Result)
 }
 
-func doTransformTextAndSplit(c pb.TextToolsClient) {
+func doTransformTextAndSplit(c pb.TextToolsServiceClient) {
 
 	fmt.Println("Calling TransformAndSplitText ...")
 
@@ -51,29 +51,29 @@ func doTransformTextAndSplit(c pb.TextToolsClient) {
 		log.Fatalf("Could not call: %v", err)
 	}
 
-	reqs := []*pb.Transformation{
+	reqs := []*pb.TransformTextRequest{
 		{
-			Transformer: pb.Transformer_LOWERCASE,
+			Transformer: pb.Transformer_TRANSFORMER_LOWERCASE,
 			Text:        "abc DEF hko",
 		},
 		{
-			Transformer: pb.Transformer_LOWERCASE,
+			Transformer: pb.Transformer_TRANSFORMER_LOWERCASE,
 			Text:        "KLNLKNLK DSDSD",
 		},
 		{
-			Transformer: pb.Transformer_UPPERCASE,
+			Transformer: pb.Transformer_TRANSFORMER_UPPERCASE,
 			Text:        "mlkjlk fdsfsdfds",
 		},
 		{
-			Transformer: pb.Transformer_LOWERCASE,
+			Transformer: pb.Transformer_TRANSFORMER_LOWERCASE,
 			Text:        "AAAAAA",
 		},
 		{
-			Transformer: pb.Transformer_UPPERCASE,
+			Transformer: pb.Transformer_TRANSFORMER_UPPERCASE,
 			Text:        "bbbbb",
 		},
 		{
-			Transformer: pb.Transformer_LOWERCASE,
+			Transformer: pb.Transformer_TRANSFORMER_LOWERCASE,
 			Text:        "AbAbAb",
 		},
 	}

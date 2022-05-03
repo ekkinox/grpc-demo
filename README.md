@@ -57,3 +57,12 @@ protoc --php_out=php \
     --plugin=protoc-gen-grpc=~/grpc/cmake/build/grpc_php_plugin \
     proto/textTools.proto
 ```
+
+## Generate Proto stubs using BUF Build cli
+
+- First you need to install buf build cli following this [link](https://docs.buf.build/installation)
+- Then run the command bellow to generate the stubs using buf config files 
+
+```shell
+make generate
+```

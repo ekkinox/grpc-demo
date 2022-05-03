@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/ekkinox/grpc-demo/proto/github.com/ekkinox/grpc-demo/proto"
 	"google.golang.org/grpc/reflection"
 	"io"
 	"log"
@@ -10,12 +11,11 @@ import (
 	"strings"
 	"time"
 
-	pb "github.com/ekkinox/grpc-demo/proto"
 	"google.golang.org/grpc"
 )
 
 type server struct {
-	pb.TextToolsServer
+	proto.TextToolsServiceServer
 }
 
 func main() {
@@ -29,7 +29,7 @@ func main() {
 
 	s := grpc.NewServer()
 
-	pb.RegisterTextToolsServer(s, &server{})
+	proto.RegisterTextToolsServiceServer(s, &server{})
 	reflection.Register(s)
 
 	err = s.Serve(lis)
@@ -38,18 +38,18 @@ func main() {
 	}
 }
 
-func (*server) TransformText(ctx context.Context, in *pb.Transformation) (*pb.TransformationResult, error) {
+func (*server) TransformText(ctx context.Context, in *proto.TransformTextRequest) (*proto.TransformTextResponse, error) {
 
 	log.Printf("Received a TransformText with %v\n", in)
 
 	result := performTransformation(in)
 
-	return &pb.TransformationResult{
+	return &proto.TransformTextResponse{
 		Result: result,
 	}, nil
 }
 
-func (*server) TransformAndSplitText(stream pb.TextTools_TransformAndSplitTextServer) error {
+func (*server) TransformAndSplitText(stream proto.TextToolsService_TransformAndSplitTextServer) error {
 
 	log.Println("Received a TransformAndSplitText")
 
@@ -69,7 +69,7 @@ func (*server) TransformAndSplitText(stream pb.TextTools_TransformAndSplitTextSe
 
 		for _, word := range split {
 
-			err = stream.Send(&pb.TransformationResult{
+			err = stream.Send(&proto.TransformTextResponse{
 				Result: word,
 			})
 
@@ -83,11 +83,11 @@ func (*server) TransformAndSplitText(stream pb.TextTools_TransformAndSplitTextSe
 	}
 }
 
-func performTransformation(t *pb.Transformation) string {
+func performTransformation(t *proto.TransformTextRequest) string {
 	switch t.Transformer {
-	case pb.Transformer_UPPERCASE:
+	case proto.Transformer_TRANSFORMER_UPPERCASE:
 		return strings.ToUpper(t.Text)
-	case pb.Transformer_LOWERCASE:
+	case proto.Transformer_TRANSFORMER_LOWERCASE:
 		return strings.ToLower(t.Text)
 	default:
 		return t.Text

@@ -5,7 +5,7 @@ namespace App\TextTools;
 
 /**
  */
-class TextToolsClient extends \Grpc\BaseStub {
+class TextToolsServiceClient extends \Grpc\BaseStub {
 
     /**
      * @param string $hostname hostname
@@ -18,16 +18,16 @@ class TextToolsClient extends \Grpc\BaseStub {
 
     /**
      * Unary rpc
-     * @param \App\TextTools\Transformation $argument input argument
+     * @param \App\TextTools\TransformTextRequest $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
      * @return \Grpc\UnaryCall
      */
-    public function TransformText(\App\TextTools\Transformation $argument,
+    public function TransformText(\App\TextTools\TransformTextRequest $argument,
       $metadata = [], $options = []) {
-        return $this->_simpleRequest('/textTools.TextTools/TransformText',
+        return $this->_simpleRequest('/text_tools.TextToolsService/TransformText',
         $argument,
-        ['\App\TextTools\TransformationResult', 'decode'],
+        ['\App\TextTools\TransformTextResponse', 'decode'],
         $metadata, $options);
     }
 
@@ -38,8 +38,8 @@ class TextToolsClient extends \Grpc\BaseStub {
      * @return \Grpc\BidiStreamingCall
      */
     public function TransformAndSplitText($metadata = [], $options = []) {
-        return $this->_bidiRequest('/textTools.TextTools/TransformAndSplitText',
-        ['\App\TextTools\TransformationResult','decode'],
+        return $this->_bidiRequest('/text_tools.TextToolsService/TransformAndSplitText',
+        ['\App\TextTools\TransformTextResponse','decode'],
         $metadata, $options);
     }
 
