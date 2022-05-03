@@ -31,7 +31,7 @@ func doTransformText(c pb.TextToolsServiceClient) {
 	fmt.Println("Calling TransformText ...")
 
 	res, err := c.TransformText(context.Background(), &pb.TransformTextRequest{
-		Transformer: pb.Transformer_TRANSFORMER_UNSPECIFIED,
+		Transformer: pb.Transformer_TRANSFORMER_UPPERCASE,
 		Text:        "abcdef",
 	})
 
@@ -61,7 +61,7 @@ func doTransformTextAndSplit(c pb.TextToolsServiceClient) {
 			Text:        "KLNLKNLK DSDSD",
 		},
 		{
-			Transformer: pb.Transformer_TRANSFORMER_UNSPECIFIED,
+			Transformer: pb.Transformer_TRANSFORMER_UPPERCASE,
 			Text:        "mlkjlk fdsfsdfds",
 		},
 		{
@@ -69,7 +69,7 @@ func doTransformTextAndSplit(c pb.TextToolsServiceClient) {
 			Text:        "AAAAAA",
 		},
 		{
-			Transformer: pb.Transformer_TRANSFORMER_UNSPECIFIED,
+			Transformer: pb.Transformer_TRANSFORMER_UPPERCASE,
 			Text:        "bbbbb",
 		},
 		{

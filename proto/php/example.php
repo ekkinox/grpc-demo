@@ -27,7 +27,7 @@ class TestController extends AbstractController
         [$reply, $status] = $client->TransformText(
             new TransformTextRequest(
                 [
-                    'transformer' => Transformer::TRANSFORMER_UPPERCASE_UNSPECIFIED,
+                    'transformer' => Transformer::TRANSFORMER_UPPERCASE,
                     'text' => $value
                 ]
             )

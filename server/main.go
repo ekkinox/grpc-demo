@@ -81,7 +81,7 @@ func (*server) TransformAndSplitText(stream proto.TextToolsService_TransformAndS
 
 func performTransformation(t *proto.TransformTextRequest) string {
 	switch t.Transformer {
-	case proto.Transformer_TRANSFORMER_UNSPECIFIED:
+	case proto.Transformer_TRANSFORMER_UPPERCASE:
 		return strings.ToUpper(t.Text)
 	case proto.Transformer_TRANSFORMER_LOWERCASE:
 		return strings.ToLower(t.Text)
