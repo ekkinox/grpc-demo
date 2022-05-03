@@ -1,10 +1,10 @@
-module github.com/ekkinox/grpc-demo/proto
+module github.com/ekkinox/grpc-demo/proto/go
 
 go 1.18
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.10.0
-	google.golang.org/genproto v0.0.0-20220317150908-0efb43f6373e
+	google.golang.org/genproto v0.0.0-20220502173005-c8bf987b8c21
 	google.golang.org/grpc v1.46.0
 	google.golang.org/protobuf v1.28.0
 )
