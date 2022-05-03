@@ -1,5 +1,5 @@
-.PHONY: gen-proto
-gen-proto:
+.PHONY: generate
+generate:
 	docker run \
       --volume "$(pwd):/workspace" \
       --workdir /workspace \

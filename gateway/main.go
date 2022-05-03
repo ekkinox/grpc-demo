@@ -2,15 +2,15 @@ package main
 
 import (
 	"context"
-	"github.com/ekkinox/grpc-demo/proto/github.com/ekkinox/grpc-demo/proto"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	"google.golang.org/grpc/credentials/insecure"
 	"net/http"
 	"os"
 
+	"github.com/ekkinox/grpc-demo/proto/github.com/ekkinox/grpc-demo/proto"
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/rs/zerolog"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 func main() {

@@ -12,16 +12,21 @@ use UnexpectedValueException;
 class Transformer
 {
     /**
-     * Generated from protobuf enum <code>TRANSFORMER_UPPERCASE_UNSPECIFIED = 0;</code>
+     * Generated from protobuf enum <code>TRANSFORMER_UNSPECIFIED = 0;</code>
      */
-    const TRANSFORMER_UPPERCASE_UNSPECIFIED = 0;
+    const TRANSFORMER_UNSPECIFIED = 0;
     /**
-     * Generated from protobuf enum <code>TRANSFORMER_LOWERCASE = 1;</code>
+     * Generated from protobuf enum <code>TRANSFORMER_UPPERCASE = 1;</code>
      */
-    const TRANSFORMER_LOWERCASE = 1;
+    const TRANSFORMER_UPPERCASE = 1;
+    /**
+     * Generated from protobuf enum <code>TRANSFORMER_LOWERCASE = 2;</code>
+     */
+    const TRANSFORMER_LOWERCASE = 2;
 
     private static $valueToName = [
-        self::TRANSFORMER_UPPERCASE_UNSPECIFIED => 'TRANSFORMER_UPPERCASE_UNSPECIFIED',
+        self::TRANSFORMER_UNSPECIFIED => 'TRANSFORMER_UNSPECIFIED',
+        self::TRANSFORMER_UPPERCASE => 'TRANSFORMER_UPPERCASE',
         self::TRANSFORMER_LOWERCASE => 'TRANSFORMER_LOWERCASE',
     ];
 

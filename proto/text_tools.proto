@@ -8,8 +8,9 @@ option php_metadata_namespace = "App\\GPBMetadata";
 import "google/api/annotations.proto";
 
 enum Transformer {
-  TRANSFORMER_UPPERCASE_UNSPECIFIED = 0;
-  TRANSFORMER_LOWERCASE = 1;
+  TRANSFORMER_UNSPECIFIED = 0;
+  TRANSFORMER_UPPERCASE = 1;
+  TRANSFORMER_LOWERCASE = 2;
 }
 
 message TransformTextRequest {
