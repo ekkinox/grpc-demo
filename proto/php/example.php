@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\TextTools\TextToolsClient;
-use App\TextTools\Transformation;
+use App\TextTools\TextToolsServiceClient;
+use App\TextTools\TransformTextRequest;
 use App\TextTools\Transformer;
 use Grpc\ChannelCredentials;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +16,7 @@ class TestController extends AbstractController
     public function index(string $value): Response
     {
 
-        $client = new TextToolsClient(
+        $client = new TextToolsServiceClient(
             "localhost:50051",
             [
                 'credentials' => ChannelCredentials::createInsecure()
@@ -25,9 +25,9 @@ class TestController extends AbstractController
 
 
         [$reply, $status] = $client->TransformText(
-            new Transformation(
+            new TransformTextRequest(
                 [
-                    'transformer' => Transformer::UPPERCASE,
+                    'transformer' => Transformer::TRANSFORMER_UPPERCASE_UNSPECIFIED,
                     'text' => $value
                 ]
             )

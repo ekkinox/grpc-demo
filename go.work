@@ -6,4 +6,5 @@ use (
 	./client
 	./proto
 	./server
+	./gateway
 )
