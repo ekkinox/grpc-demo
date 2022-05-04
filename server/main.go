@@ -3,19 +3,19 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/ekkinox/grpc-demo/proto/github.com/ekkinox/grpc-demo/proto"
-	"google.golang.org/grpc/reflection"
 	"io"
 	"log"
 	"net"
 	"strings"
 	"time"
 
+	pb "github.com/ekkinox/grpc-demo/proto/go"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 type server struct {
-	proto.TextToolsServiceServer
+	pb.TextToolsServiceServer
 }
 
 func main() {
@@ -29,7 +29,7 @@ func main() {
 
 	s := grpc.NewServer()
 
-	proto.RegisterTextToolsServiceServer(s, &server{})
+	pb.RegisterTextToolsServiceServer(s, &server{})
 	reflection.Register(s)
 
 	err = s.Serve(lis)
@@ -38,18 +38,18 @@ func main() {
 	}
 }
 
-func (*server) TransformText(ctx context.Context, in *proto.TransformTextRequest) (*proto.TransformTextResponse, error) {
+func (*server) TransformText(ctx context.Context, in *pb.TransformTextRequest) (*pb.TransformTextResponse, error) {
 
 	log.Printf("Received a TransformText with %v\n", in)
 
 	result := performTransformation(in)
 
-	return &proto.TransformTextResponse{
+	return &pb.TransformTextResponse{
 		Result: result,
 	}, nil
 }
 
-func (*server) TransformAndSplitText(stream proto.TextToolsService_TransformAndSplitTextServer) error {
+func (*server) TransformAndSplitText(stream pb.TextToolsService_TransformAndSplitTextServer) error {
 
 	log.Println("Received a TransformAndSplitText")
 
@@ -69,7 +69,7 @@ func (*server) TransformAndSplitText(stream proto.TextToolsService_TransformAndS
 
 		for _, word := range split {
 
-			err = stream.Send(&proto.TransformTextResponse{
+			err = stream.Send(&pb.TransformTextResponse{
 				Result: word,
 			})
 
@@ -83,11 +83,11 @@ func (*server) TransformAndSplitText(stream proto.TextToolsService_TransformAndS
 	}
 }
 
-func performTransformation(t *proto.TransformTextRequest) string {
+func performTransformation(t *pb.TransformTextRequest) string {
 	switch t.Transformer {
-	case proto.Transformer_TRANSFORMER_UPPERCASE:
+	case pb.Transformer_TRANSFORMER_UPPERCASE:
 		return strings.ToUpper(t.Text)
-	case proto.Transformer_TRANSFORMER_LOWERCASE:
+	case pb.Transformer_TRANSFORMER_LOWERCASE:
 		return strings.ToLower(t.Text)
 	default:
 		return t.Text

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/ekkinox/grpc-demo/proto/github.com/ekkinox/grpc-demo/proto"
+	pb "github.com/ekkinox/grpc-demo/proto/go"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/rs/zerolog"
 	"github.com/sirupsen/logrus"
@@ -21,12 +21,12 @@ func main() {
 
 	mux := runtime.NewServeMux()
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
-	endpoint := "127.0.0.1:50051"
-	port := ":8090"
+	endpoint := "server:50051"
+	port := ":8888"
 
 	// Register TextTool Service
 	logger.Info().Msgf("Registering TextTool Service %s", endpoint)
-	err := proto.RegisterTextToolsServiceHandlerFromEndpoint(ctx, mux, endpoint, opts)
+	err := pb.RegisterTextToolsServiceHandlerFromEndpoint(ctx, mux, endpoint, opts)
 	if err != nil {
 		logger.Fatal().Err(err)
 	}

@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+  server:
+    container_name: server
+    build:
+      context: ./server
+    ports:
+      - "50051:50051"
+    networks:
+      - grpc-demo
+
+  gateway:
+    container_name: gateway
+    build:
+      context: ./gateway
+    ports:
+      - "8888:8888"
+    networks:
+      - grpc-demo
+
+  envoy:
+    container_name: envoy
+    build:
+      context: ./envoy
+    ports:
+      - "9999:9999"
+    networks:
+      - grpc-demo
+
+networks:
+  grpc-demo:
+    driver: bridge
