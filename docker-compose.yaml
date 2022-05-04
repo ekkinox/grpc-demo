@@ -5,6 +5,8 @@ services:
     container_name: browser-app
     build:
       context: ./frontend
+    stdin_open: true
+    tty: true
     ports:
       - "1337:80"
     networks:

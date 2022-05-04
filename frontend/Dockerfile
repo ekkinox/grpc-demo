@@ -1,9 +1,9 @@
 # build environment
-FROM node:17-alpine as build
+FROM node:alpine as build
 WORKDIR /app
 COPY . ./
 RUN apk add --no-cache --virtual .gyp python3 make g++
-RUN npm install
+RUN npm i --silent
 RUN yarn build
 
 # production environment

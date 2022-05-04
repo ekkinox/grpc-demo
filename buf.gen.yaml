@@ -19,4 +19,4 @@ plugins:
     out: frontend/js
     opt:
       - import_style=commonjs
-#      - binary
+      - binary
