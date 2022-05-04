@@ -1,7 +1,14 @@
 version: '3'
 
 services:
-
+  client:
+    container_name: browser-app
+    build:
+      context: ./frontend
+    ports:
+      - "1337:80"
+    networks:
+      - grpc-demo
   server:
     container_name: server
     build:
@@ -10,16 +17,6 @@ services:
       - "50051:50051"
     networks:
       - grpc-demo
-
-  gateway:
-    container_name: gateway
-    build:
-      context: ./gateway
-    ports:
-      - "8888:8888"
-    networks:
-      - grpc-demo
-
   envoy:
     container_name: envoy
     build:
@@ -28,7 +25,14 @@ services:
       - "9999:9999"
     networks:
       - grpc-demo
-
+  gateway:
+    container_name: gateway
+    build:
+      context: ./gateway
+    ports:
+      - "8888:8888"
+    networks:
+      - grpc-demo
 networks:
   grpc-demo:
     driver: bridge

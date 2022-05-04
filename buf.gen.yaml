@@ -1,8 +1,5 @@
 version: v1
 plugins:
-  - remote: buf.build/grpc-ecosystem/plugins/grpc-gateway:v2.10.0-1
-    out: proto/go
-    opt: paths=source_relative
   - remote: buf.build/protocolbuffers/plugins/go:v1.27.1-1
     out: proto/go
     opt: paths=source_relative
@@ -14,8 +11,12 @@ plugins:
   - remote: buf.build/protocolbuffers/plugins/php:v3.20.1-1
     out: proto/php
   - remote: buf.build/grpc/plugins/web:v1.3.1-2
-    out: proto/js
-    opt: mode=grpcwebtext,import_style=commonjs
+    out: frontend/js
+    opt:
+      - mode=grpcwebtext
+      - import_style=commonjs+dts
   - remote: buf.build/protocolbuffers/plugins/js:v3.20.1-1
-    out: proto/js
-    opt: import_style=commonjs
+    out: frontend/js
+    opt:
+      - import_style=commonjs
+#      - binary
