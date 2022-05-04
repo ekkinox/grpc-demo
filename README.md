@@ -9,7 +9,7 @@
 - [Available services](#available-services)
   - [gRPC server](#grpc-server)
   - [gRPC gateway](#grpc-gateway)
-  - [gRPC envoy](#grpc-envoy)
+  - [gRPC envoy proxy](#grpc-envoy-proxy)
 
 ## Installation
 
@@ -42,11 +42,11 @@ Then check the [proto](proto) folder where you'll find:
 
 ## Available services
 
-| Name         | Host            | Description             |
-|--------------|-----------------|-------------------------|
-| gRPC server  | localhost:50051 | The go gRPC server      |
-| gRPC gateway | localhost:8888  | The go gRPC gateway     |
-| gRPC envoy   | localhost:9999  | The go gRPC envoy proxy |
+| Name             | Host            | Description                  |
+|------------------|-----------------|------------------------------|
+| gRPC server      | localhost:50051 | The gRPC server (go)         |
+| gRPC gateway     | localhost:8888  | The gRPC gateway (go)        |
+| gRPC envoy proxy | localhost:9999  | The gRPC envoy proxy (envoy) |
 
 ### gRPC server
 
@@ -73,8 +73,10 @@ You can access it on `localhost:8888` to interact with it on following endpoint:
 | [POST] /v1/transform           | To call with REST the TransformText rpc         |
 | [POST] /v1/transform-and-split | To call with REST the TransformAndSplitText rpc |
 
-### gRPC envoy
+### gRPC envoy proxy
 
 This [envoy proxy](https://www.envoyproxy.io/) is running the `envoy.filters.http.grpc_web` filter to enable frontend application to interact using [gRPC-web](https://github.com/grpc/grpc-web).
+
+The proxy configuration is located in [envoy](envoy) folder.
 
 You can access it on `localhost:9999` to interact with it, and use the [frontend](frontend) client to test from a web application.
