@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	pb "github.com/ekkinox/grpc-demo/proto/go"
+	pb "github.com/ekkinox/grpc-demo/gateway/proto/go"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/rs/zerolog"
 	"github.com/sirupsen/logrus"

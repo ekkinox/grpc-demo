@@ -5,6 +5,8 @@ option go_package = "github.com/ekkinox/grpc-demo/proto";
 option php_namespace = "App\\TextTools";
 option php_metadata_namespace = "App\\GPBMetadata";
 
+import "google/api/annotations.proto";
+
 enum Transformer {
   TRANSFORMER_UNSPECIFIED = 0;
   TRANSFORMER_UPPERCASE = 1;
@@ -22,7 +24,17 @@ message TransformTextResponse {
 
 service TextToolsService {
   // Unary rpc
-  rpc TransformText(TransformTextRequest) returns (TransformTextResponse) {};
+  rpc TransformText(TransformTextRequest) returns (TransformTextResponse) {
+    option (google.api.http) = {
+      post: "/v1/transform",
+      body: "*"
+    };
+  };
   // BiDi rpc
-  rpc TransformAndSplitText(stream TransformTextRequest) returns (stream TransformTextResponse) {};
+  rpc TransformAndSplitText(stream TransformTextRequest) returns (stream TransformTextResponse) {
+    option (google.api.http) = {
+      post: "/v1/transform-and-split",
+      body: "*"
+    };
+  };
 }
