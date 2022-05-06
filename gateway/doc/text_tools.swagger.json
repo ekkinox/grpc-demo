@@ -1,0 +1,170 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "gRPC: SOA booster",
+    "version": "1.0",
+    "contact": {
+      "name": "Ankorstore",
+      "url": "https://github.com/ekkinox/grpc-demo",
+      "email": "amine.abri@ankorstore.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://github.com/ekkinox/grpc-demo/blob/main/LICENSE"
+    }
+  },
+  "tags": [
+    {
+      "name": "TextToolsService"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/transform": {
+      "post": {
+        "summary": "Transform text",
+        "operationId": "TextToolsService_TransformText",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/text_toolsTransformTextResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/text_toolsTransformTextRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Transform"
+        ]
+      }
+    },
+    "/v1/transform-and-split": {
+      "post": {
+        "summary": "Transform and  split text",
+        "operationId": "TextToolsService_TransformAndSplitText",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/text_toolsTransformTextResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of text_toolsTransformTextResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/text_toolsTransformTextRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Transform"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "text_toolsTransformTextRequest": {
+      "type": "object",
+      "properties": {
+        "transformer": {
+          "$ref": "#/definitions/text_toolsTransformer"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "text_toolsTransformTextResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string"
+        }
+      }
+    },
+    "text_toolsTransformer": {
+      "type": "integer",
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "default": "0"
+    }
+  },
+  "externalDocs": {
+    "description": "gRPC: SOA booster",
+    "url": "https://github.com/ekkinox/grpc-demo"
+  }
+}
